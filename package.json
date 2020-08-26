@@ -1,0 +1,42 @@
+{
+  "name": "express-gods-of-arena",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "start:dev": "nodemon ./bin/www",
+    "test": "npm run test:db:migrate && NODE_ENV=test mocha --recursive",
+    "test:db:create": "NODE_ENV=test node scripts/database/create-test-db",
+    "test:db:delete": "NODE_ENV=test node scripts/database/delete-test-db",
+    "test:db:migrate": "knex --knexfile db/knexfile.js migrate:latest --env test",
+    "test:db:reset": "npm run test:db:delete && npm run test:db:init && npm run test:db:migrate",
+    "db:create": "node scripts/database/create-dev-db",
+    "db:delete": "node scripts/database/delete-dev-db",
+    "db:migrate": "knex --knexfile db/knexfile.js migrate:latest",
+    "db:prepare": "npm run db:delete && npm run db:create && npm run db:migrate",
+    "db:seed": "knex --knexfile db/knexfile.js seed:run",
+    "db:reset": "npm run db:prepare && npm run db:seed"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "cookie-parser": "^1.4.5",
+    "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
+    "ejs": "~2.6.1",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "knex": "^0.21.5",
+    "morgan": "~1.9.1",
+    "pg": "^8.3.2",
+    "pg-hstore": "^2.3.3"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "chai-http": "^4.3.0",
+    "mocha": "^7.1.1",
+    "nodemon": "^2.0.2",
+    "sinon": "^9.0.1",
+    "sinon-chai": "^3.5.0"
+  }
+}
